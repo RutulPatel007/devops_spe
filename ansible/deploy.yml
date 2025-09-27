@@ -1,0 +1,17 @@
+- name: Deploy Scientific Calculator
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: /opt/homebrew/opt/python@3.13/bin/python3.13
+  tasks:
+    - name: Pull Docker Image
+      community.docker.docker_image:
+        name: "rutul2108/devops_spe:latest"
+        source: pull
+
+    - name: Run Docker Container
+      community.docker.docker_container:
+        name: scientific_calculator
+        image: "rutul2108/devops_spe:latest"
+        state: started
+        tty: yes
+        interactive: yes

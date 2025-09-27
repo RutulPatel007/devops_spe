@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-username>/scientific-calculator-devops.git'
+                git 'https://github.com/RutulPatel007/devops_spe.git'
             }
         }
         stage('Build') {
@@ -19,13 +19,13 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t <your-dockerhub-username>/scientific-calculator:latest .'
+                sh 'docker build -t rutul2108/scientific-calculator:latest .'
             }
         }
         stage('Docker Push') {
             steps {
                 withDockerRegistry([credentialsId: 'dockerhub-cred', url: '']) {
-                    sh 'docker push <your-dockerhub-username>/scientific-calculator:latest'
+                    sh 'docker push rutul2108/scientific-calculator:latest'
                 }
             }
         }

@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/RutulPatel007/devops_spe.git'
+                checkout scm
             }
         }
         stage('Build') {

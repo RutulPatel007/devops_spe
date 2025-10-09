@@ -16,6 +16,8 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t rutul2108/devops_spe:latest .'

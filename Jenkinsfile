@@ -21,6 +21,8 @@ pipeline {
                 sh 'docker build -t rutul2108/devops_spe:latest .'
             }
         }
+
+
         stage('Docker Push') {
             steps {
                 withDockerRegistry([credentialsId: 'dockerhub-cred', url: '']) {

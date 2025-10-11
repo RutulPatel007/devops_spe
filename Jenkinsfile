@@ -1,12 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-    }
-
     environment {
         DOCKER_IMAGE = 'rutul2108/devops_spe:latest'
+        MAVEN_HOME = '/opt/homebrew/bin'   // 👈 Change this to your actual mvn path
+        PATH = "$PATH:${MAVEN_HOME}"
     }
 
     stages {
@@ -15,11 +13,16 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh '''
+                echo "Using Maven from: $(which mvn)"
+                mvn clean package
+                '''
             }
         }
+
         stage('Test') {
             steps {
                 sh 'mvn test'

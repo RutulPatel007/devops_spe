@@ -53,21 +53,13 @@ pipeline {
     }
 
     post {
+
             success {
-                echo "✅ Build & Push successful!"
-                emailext(
-                    subject: "✅ Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                    body: """
-                    <h2>Build Successful 🎉</h2>
-                    <p><b>Project:</b> ${env.JOB_NAME}</p>
-                    <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                    <p><b>Status:</b> SUCCESS ✅</p>
-                    <p><b>Git Commit:</b> ${env.GIT_COMMIT}</p>
-                    <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                    """,
-                    to: 'rutul2108@gmail.com'
-                )
+                mail to: 'rutul2108@gmail.com',
+                     subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: "Your Jenkins build was successful!\n${env.BUILD_URL}"
             }
+
             failure {
                 echo "❌ Pipeline failed!"
                 emailext(

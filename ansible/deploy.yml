@@ -8,7 +8,6 @@
         name: "rutul2108/devops_spe:latest"
         source: pull
 
-
     - name: Run Docker Container
       community.docker.docker_container:
         name: scientific_calculator

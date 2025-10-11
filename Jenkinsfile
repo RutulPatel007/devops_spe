@@ -12,8 +12,6 @@ pipeline {
                 checkout scm
             }
         }
-
-
         stage('Verify Tools') {
             steps {
                 sh '''

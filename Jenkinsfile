@@ -68,8 +68,6 @@ pipeline {
                     to: 'rutul2108@gmail.com'
                 )
             }
-
-
             failure {
                 echo "❌ Pipeline failed!"
                 emailext(
@@ -84,7 +82,6 @@ pipeline {
                     to: 'rutul2108@gmail.com'
                 )
             }
-
             always {
                 echo "📨 Notification sent. Pipeline completed."
             }

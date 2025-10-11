@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-    }
-
     environment {
         DOCKER_IMAGE = 'rutul2108/devops_spe:latest'
     }

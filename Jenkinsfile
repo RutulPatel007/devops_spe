@@ -50,6 +50,18 @@ pipeline {
             }
         }
 
+        stage('Deploy with Ansible') {
+            steps {
+
+                sh """
+                ansible-playbook -i localhost, ansible/deploy.yml -c local \
+                """
+            }
+        }
+
+
+
+
     }
 
     post {

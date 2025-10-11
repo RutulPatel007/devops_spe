@@ -22,7 +22,8 @@
         name: scientific_calculator
         image: "rutul2108/devops_spe:latest"
         state: started
+        interactive: yes
         detach: yes
         restart_policy: unless-stopped
         ports:
-          - "9090:8080"
+          - "9090:9090"

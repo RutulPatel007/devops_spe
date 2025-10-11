@@ -37,19 +37,20 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Build & Push') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE} ."
-            }
-        }
-
-        stage('Docker Push') {
-            steps {
-                withDockerRegistry([credentialsId: 'docker-creds', url: '']) {
-                    sh "docker push ${DOCKER_IMAGE}"
+                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker pull openjdk:17-slim
+                    docker build -t ${DOCKER_IMAGE} .
+                    docker push ${DOCKER_IMAGE}
+                    docker logout
+                    '''
                 }
             }
         }
+
     }
 
     post {

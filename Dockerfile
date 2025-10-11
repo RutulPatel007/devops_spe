@@ -7,5 +7,7 @@ WORKDIR /app
 # Copy jar from Maven target
 COPY target/devops_spe-1.0-SNAPSHOT.jar calculator.jar
 
+EXPOSE 8080
+
 # Run the application
 ENTRYPOINT ["java", "-jar", "calculator.jar"]

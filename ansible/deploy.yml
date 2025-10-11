@@ -1,17 +1,28 @@
 - name: Deploy Scientific Calculator
   hosts: localhost
+  connection: local                # <--- ADD THIS
+  gather_facts: false             # optional, speeds up play
   vars:
-    ansible_python_interpreter: /opt/homebrew/opt/python@3.13/bin/python3.13
+    ansible_python_interpreter: /Users/rutul/Documents/devops_spe/.venv_ansible/bin/python
   tasks:
     - name: Pull Docker Image
       community.docker.docker_image:
-        name: "rutul2108/devops_spe:latest"
+        name: "rutul2108/devops_spe"
+        tag: latest
         source: pull
+
+    - name: Stop existing container if running
+      community.docker.docker_container:
+        name: scientific_calculator
+        state: absent
+        force_kill: true
 
     - name: Run Docker Container
       community.docker.docker_container:
         name: scientific_calculator
         image: "rutul2108/devops_spe:latest"
         state: started
-        tty: yes
-        interactive: yes
+        detach: yes
+        restart_policy: unless-stopped
+        ports:
+          - "9090:8080"

@@ -69,6 +69,7 @@ pipeline {
                 )
             }
 
+
             failure {
                 echo "❌ Pipeline failed!"
                 emailext(

@@ -16,8 +16,6 @@ public class Calculator {
             throw new IllegalArgumentException("Cannot calculate factorial of negative number");
         }
 
-
-
         long result = 1;
         for (int i = 2; i <= n; i++) {
             result *= i;
